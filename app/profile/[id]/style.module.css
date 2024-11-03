@@ -1,0 +1,130 @@
+
+.profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    padding: 10px;
+}
+
+.info {
+    display: flex;
+    align-items: self-start;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.divImg {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 1px solid #ccc;
+    display: flex;
+}
+
+.userImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.info .name {
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+.info .username {
+    font-weight: 600;
+}
+.info .email {
+    font-weight: 600;
+}
+
+.btns {
+    display: flex;
+    width: 100%;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    flex-wrap: wrap
+}
+
+.btnCreate {
+    padding: 8px;
+    background: #000;
+    color: #fff;
+    border: none;
+    text-decoration: none;
+}
+
+.verified {
+    width: 20px;
+    height: 20px;
+    overflow: hidden;
+    display: flex;
+}
+
+.verified img {
+    width: 100%;
+}
+
+
+
+.posts {
+    overflow: auto;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.post {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+.postImg {
+    width: 50%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.img {
+    width: 100%;
+}
+
+.infoUser {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.userImg {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.username {
+    font-weight: 700;
+    font-size: 17px;
+}
+

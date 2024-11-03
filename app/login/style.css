@@ -1,0 +1,52 @@
+.loginPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+    gap: 30px;
+}
+
+.loginForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 50%;
+}
+
+.loginForm input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+}
+
+.loginForm button {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.loginForm button:hover {
+    background-color: #ccc;
+}
+
+.loginForm .link {
+    text-decoration: none;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.loginForm .link:hover {
+    text-decoration: underline;
+}
+
+.loginForm .createAccount {
+    display: flex;
+    justify-content: flex-end;
+    width: 190px;
+}

@@ -1,0 +1,160 @@
+.body {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+
+.post {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    border-radius: 8px;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: inherit;
+    background: rgba(255, 255, 255, 0.1);
+    margin-bottom: 50px;
+    margin: auto;
+}
+
+.postTop {
+    width: 100%;
+    min-height: 100vh;
+    text-align: center;
+}
+
+.postHeader {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 20px;
+    border-bottom: 1px solid #ccc;
+}
+.userImg {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.verificationBadge {
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+}
+
+.username {
+    font-size: 19px;
+    font-weight: bold;
+    text-decoration: none;
+    color: inherit;
+}
+
+.postBody {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+}
+
+.Img {
+    width: 370px;
+    height: 370px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    object-fit: cover;
+    margin-top: 50px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    overflow: hidden;
+}
+
+.postImg {
+    width: 100%;
+}
+
+.postText {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 20px;
+    border-bottom: 1px solid #ccc;
+    width: 100%;
+}
+
+
+.commentsSection {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 100%;
+    padding: 10px;
+    align-items: flex-start;
+    justify-content: center;
+    text-decoration: none;
+    color: inherit;
+    background: #121212;
+}
+
+.comment {
+    display: flex;
+    gap: 10px;
+    width: 80%;
+    max-width: 80%;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    align-items: flex-start;
+    text-decoration: none;
+    color: inherit;
+    align-items: center;
+}
+
+.inputComment {
+    padding: 10px;
+    outline: none;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    max-width: 200px;
+    max-height: 50px;
+    min-width: 200px;
+    min-height: 50px;
+    color: #fff;
+}
+
+.buttonComment {
+    padding: 10px;
+    outline: none;
+    border: none;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #e9e6e6;
+    cursor: pointer;
+}
+
+.formComment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 20px;
+    border-radius: 8px;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: inherit;
+    background: #121212;
+}

@@ -1,0 +1,91 @@
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  max-width: 100%;
+  min-width: 100%;
+  margin: auto;
+  padding: 20px 0;
+  backdrop-filter: blur(5px);
+  background: rgba(255, 255, 255, 0.3);
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+nav .logo {
+  color: #fff;
+  text-decoration: none;
+  font-size: 32px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 700;
+  padding: 0 20px;
+}
+
+nav ul li {
+  display: inline-block;
+  margin: 10px;
+}
+
+nav ul li .itam {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+nav ul li .itam:hover {
+  color: #3838b2;
+}
+nav ul li .itam:focus {
+  color: #3838b2;
+}
+
+.logout {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+  transition: 0.3s;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  background: #000;
+  padding: 3px 5px;
+  border-radius: 10px;
+}
+.logout:hover {
+  color: #3838b2;
+}
+.logout:focus {
+  color: #3838b2;
+}
+
+@media (min-width: 1px) and (max-width: 549px) {
+  nav .logo {
+    font-size: 21px;
+  }
+  nav ul li .itam {
+    font-size: 15px;
+  }
+  nav ul li {
+    margin: 5px;
+  }
+}
+
+@media (max-width: 350px) {
+  nav ul li .itam {
+    font-size: 14px;
+  }
+  nav ul li {
+    margin: 0;
+    padding: 5px;
+  }
+  nav .logo {
+    font-size: 19px;
+  }
+}

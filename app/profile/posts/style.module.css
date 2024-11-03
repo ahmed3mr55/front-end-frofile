@@ -1,0 +1,68 @@
+.posts {
+    overflow: auto;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.post {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: inherit;
+}
+
+.postImg {
+    width: 50%;
+    height: 300px;
+    object-fit: cover;
+}
+
+.img {
+    width: 100%;
+}
+
+.infoUser {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.userImg {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.username {
+    font-weight: 700;
+    font-size: 17px;
+}
+
+.deleteButton {
+    background-color: red; /* لون خلفية الزر */
+    color: white; /* لون النص */
+    border: none; /* إزالة الحدود */
+    padding: 10px 15px; /* إضافة Padding */
+    cursor: pointer; /* تغيير شكل المؤشر عند المرور على الزر */
+    margin-left: 10px; /* إضافة Margin بين الزر والبوست */
+  }
+  
+  .deleteButton:hover {
+    background-color: darkred; /* لون الزر عند المرور عليه */
+  }
+  

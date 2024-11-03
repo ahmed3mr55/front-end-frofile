@@ -19,7 +19,7 @@ const PostPage = async (props) => {
   }
 
   // جلب بيانات البوست من API مع التوكن
-  const res = await fetch(`http://localhost:5000/post/${id}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAN}/post/${id}`, {
     headers: {
       Authorization: token, // إرسال التوكن في الـ headers
     },
@@ -37,7 +37,7 @@ const PostPage = async (props) => {
   const post = posts;
 
   // جلب التعليقات الخاصة بالبوست
-  const commentsRes = await fetch(`http://localhost:5000/post/${id}/comments`, {
+  const commentsRes = await fetch(`${process.env.NEXT_PUBLIC_DOMAN}/post/${id}/comments`, {
     headers: {
       Authorization: token, // إرسال التوكن في الـ headers
     },
@@ -54,7 +54,7 @@ const PostPage = async (props) => {
   const commentsData = await commentsRes.json();
   const comments = commentsData.comments; // الحصول على التعليقات
 
-  const resUser = await fetch(`http://localhost:5000/profile`, {
+  const resUser = await fetch(`${process.env.NEXT_PUBLIC_DOMAN}/profile`, {
     method: "GET",
     headers: {
       Authorization: token,

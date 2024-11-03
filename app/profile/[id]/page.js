@@ -19,7 +19,7 @@ const ProfilePage = async (props) => {
   }
 
   // جلب البيانات من API مع التوكن
-  const res = await fetch(`http://localhost:5000/user/${id}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAN}/user/${id}`, {
     headers: {
       Authorization: token, // لو محتاج تبعت التوكن
     },
@@ -33,7 +33,7 @@ const ProfilePage = async (props) => {
   }
   const user = await res.json();
 
-  const res1 = await fetch(`http://localhost:5000/postsid/${id}`, {
+  const res1 = await fetch(`${process.env.NEXT_PUBLIC_DOMAN}/postsid/${id}`, {
     headers: {
       Authorization: token, // لو محتاج تبعت التوكن
     },

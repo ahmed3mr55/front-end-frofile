@@ -26,7 +26,7 @@ export default function ProfilePosts() {
       }
 
       try {
-        const res = await fetch("http://localhost:5000/profile", {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAN}/profile`, {
           method: "GET",
           headers: {
             Authorization: token, // إرسال التوكن في الـ headers

@@ -17,7 +17,7 @@ export default function Register() {
     const imageToUse = userImage || "https://cdn-icons-png.flaticon.com/256/149/149071.png";
   
     try {
-      const res = await fetch('http://localhost:5000/register', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAN}/register`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -25,7 +25,7 @@ export default function Createpost() {
     e.preventDefault();
 
     try {
-      const res = await fetch('http://localhost:5000/posts/create', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAN}/posts/create`, {
         method: 'POST',
         headers: {
           'Authorization': token, // إرسال التوكن في الـ headers

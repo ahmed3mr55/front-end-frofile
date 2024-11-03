@@ -10,7 +10,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       const token = Cookies.get("token");
-      const res = await fetch("http://localhost:5000/logout", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAN}/logout`, {
         method: "POST",
         headers: {
           Authorization: token,

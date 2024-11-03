@@ -23,7 +23,7 @@ export default function OtherPosts() {
 
     setLoading(true);
     try {
-      const res = await fetch(`http://localhost:5000/posts/all?limit=${limit}&skip=${skip}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAN}/posts/all?limit=${limit}&skip=${skip}`, {
         method: "GET",
         headers: {
           "Authorization": token,

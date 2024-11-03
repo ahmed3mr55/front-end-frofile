@@ -11,7 +11,7 @@ const CommentForm = ({ postId }) => {
     const body = formData.get("commentBody");
     const token = Cookies.get("token");
 
-    const commentRes = await fetch(`http://localhost:5000/comment`, {
+    const commentRes = await fetch(`${process.env.NEXT_PUBLIC_DOMAN}/comment`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

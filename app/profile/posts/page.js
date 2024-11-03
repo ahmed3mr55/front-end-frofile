@@ -21,7 +21,7 @@ export default function ProfilePosts() {
       }
 
       try {
-        const res = await fetch('http://localhost:5000/posts', {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAN}/posts`, {
           method: 'GET',
           headers: {
             'Authorization': token, // إرسال التوكن في الـ headers
@@ -52,7 +52,7 @@ export default function ProfilePosts() {
     }
 
     try {
-      const res = await fetch(`http://localhost:5000/posts/delete/${postId}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAN}/posts/delete/${postId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': token, // إرسال التوكن في الـ headers

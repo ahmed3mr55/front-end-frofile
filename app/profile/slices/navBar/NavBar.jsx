@@ -34,9 +34,12 @@ const Navbar = () => {
       <ul>
         <li><Link className='itam' href="/profile">Profile</Link></li>
         <li><Link className='itam' href="/profile/posts/create">Create</Link></li>
-        <li>
+        {Cookies.get("token") &&
+          <li>
           <button  className='itam logout' onClick={handleLogout}>Logout</button>
         </li>
+        }
+        
       </ul>
     </nav>
   );

@@ -1,6 +1,6 @@
 nav {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   position: fixed;
   max-width: 100%;
@@ -83,7 +83,7 @@ nav ul li .itam:focus {
   }
   nav ul li {
     margin: 0;
-    padding: 5px;
+    padding: 3px;
   }
   nav .logo {
     font-size: 19px;

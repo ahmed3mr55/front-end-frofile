@@ -4,6 +4,7 @@
     
 }
 
+
 Body {
     background: #04041b;
     color: #fff;
@@ -12,6 +13,7 @@ Body {
     height: 100vh;
     background-repeat: no-repeat;
     width: 100vw;
+    max-width: 100vw;
 }
 
 .app {

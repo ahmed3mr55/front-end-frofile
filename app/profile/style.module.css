@@ -17,6 +17,7 @@
     align-items: self-start;
     flex-direction: column;
     gap: 20px;
+    text-wrap: wrap;
 }
 
 .divImg {
@@ -78,3 +79,37 @@
     width: 100%;
 }
 
+
+
+@media (min-width: 381px) and (max-width: 649px) {
+    .profile {
+        flex-direction: column;
+        gap: 10px;
+        overflow: hidden;
+        max-width: 100%;
+        padding: 5px;
+    }
+    .divImg {
+        width: 150px;
+        height: 150px;
+    }
+    .info {
+        gap: 10px;
+    }
+    .btns {
+        width: 80%;
+        gap: 10px;
+        text-align: center;
+    }
+  }
+  
+  @media (max-width: 380px) {
+    .profile {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .divImg {
+        width: 150px;
+        height: 150px;
+    }
+  }

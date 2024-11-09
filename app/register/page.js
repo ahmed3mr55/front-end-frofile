@@ -37,8 +37,7 @@ export default function Register() {
       const data = await res.json();
 
       if (res.ok) {
-        Cookies.set('token', data.token, { expires: 7 });
-        router.push("/profile"); // إعادة توجيه بعد النجاح
+        router.push("/"); // إعادة توجيه بعد النجاح
       } else {
         setError(
           data.message || "Registration failed. Please check your inputs."

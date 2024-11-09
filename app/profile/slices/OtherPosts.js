@@ -3,6 +3,7 @@ import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
 import style from "./style.module.css";
 import Link from "next/link";
+import LikeButton from "./Like/LikeButton";
 
 export default function OtherPosts() {
   const [posts, setPosts] = useState([]);
@@ -23,12 +24,15 @@ export default function OtherPosts() {
 
     setLoading(true);
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAN}/posts/all?limit=${limit}&skip=${skip}`, {
-        method: "GET",
-        headers: {
-          "Authorization": token,
-        },
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_DOMAN}/posts/all?limit=${limit}&skip=${skip}`,
+        {
+          method: "GET",
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
 
       const data = await res.json();
       if (res.ok) {
@@ -52,7 +56,11 @@ export default function OtherPosts() {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.innerHeight + document.documentElement.scrollTop + 50 >= document.documentElement.scrollHeight && !loading) {
+      if (
+        window.innerHeight + document.documentElement.scrollTop + 50 >=
+          document.documentElement.scrollHeight &&
+        !loading
+      ) {
         fetchPosts();
       }
     };
@@ -61,23 +69,68 @@ export default function OtherPosts() {
     return () => window.removeEventListener("scroll", handleScroll); // تنظيف الحدث
   }, [loading]);
 
+  // Function to copy post link to clipboard
+  const handleShare = (postId) => {
+    const postLink = `${window.location.origin}/profile/posts/${postId}`;
+    navigator.clipboard
+      .writeText(postLink)
+      .then(() => {
+        console.log("Link copied to clipboard");
+      })
+      .catch((err) => {
+        console.error("Failed to copy link: ", err);
+      });
+  };
   return (
     <>
       {posts.length > 0 ? (
         <div className={style.posts}>
           {posts.map((post) => (
-            <Link href={`/profile/posts/${post._id}`} className={style.post} key={post._id}>
-              <div className={style.infoUser}>
-                <img className={style.userImg} src={post.userImage} />
-                <p className={style.username}>{post.username}</p>
-              </div>
-              <p>{post.body}</p>
-              {post.postImg && (
-                <div className={style.postImg}>
-                  <img className={style.img} src={post.postImg} />
+            <div className={style.postBody} key={post._id}>
+              <Link href={`/profile/posts/${post._id}`} className={style.post}>
+                <div className={style.infoUser}>
+                  <img className={style.userImg} src={post.userImage} />
+                  <p className={style.username}>{post.username}</p>
                 </div>
-              )}
-            </Link>
+                <p>{post.body}</p>
+                {post.postImg && (
+                  <div className={style.postImg}>
+                    <img className={style.img} src={post.postImg} />
+                  </div>
+                )}
+              </Link>
+              <div className={style.postFooter}>
+                <div className={style.postLike}>
+                  <LikeButton
+                    postId={post._id}
+                    initialLikes={post.likes ? post.likes.length : 0}
+                    onLikeChange={(newLikes) => {
+                      setPosts((prevPosts) =>
+                        prevPosts.map((p) =>
+                          p._id === post._id ? { ...p, likes: newLikes } : p
+                        )
+                      );
+                    }}
+                  />
+                </div>
+                <div className={style.postComment}>
+                  <Link
+                    className={style.comment}
+                    href={`/profile/posts/${post._id}`}
+                  >
+                    {post.comments ? post.comments.length : 0} comments
+                  </Link>
+                </div>
+                <div className={style.postShare}>
+                  <button 
+                    onClick={() => handleShare(post._id)}
+                    className={style.shareButton}
+                  >
+                    Share
+                  </button>
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       ) : (

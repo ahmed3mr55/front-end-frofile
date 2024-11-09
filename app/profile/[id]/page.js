@@ -2,81 +2,65 @@ import React from "react";
 import { cookies } from "next/headers";
 import style from "./style.module.css";
 import Link from "next/link";
+import LikeButton from "../slices/Like/LikeButton";
 
 const ProfilePage = async (props) => {
-  const cookieStore = cookies(); // الوصول إلى الكوكيز في بيئة السيرفر
-  const token = cookieStore.get("token")?.value; // استخراج التوكن من الكوكيز
+  const cookieStore = cookies();
+  const token = cookieStore.get("token")?.value;
   const id = props.params.id;
 
-  // طباعة التوكن والمعرف للتأكد من وجودهم
-
   if (!token) {
-    return (
-      <div>
-        <p>Unauthorized. Please login first.</p>
-      </div>
-    );
+    return <p>Unauthorized. Please login first.</p>;
   }
 
-  // جلب البيانات من API مع التوكن
   const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAN}/user/${id}`, {
-    headers: {
-      Authorization: token, // لو محتاج تبعت التوكن
-    },
+    headers: { Authorization: token },
   });
-  if (!res.ok) {
-    return (
-      <div>
-        <p>Error fetching user data. Please try again later.</p>
-      </div>
-    );
-  }
+  if (!res.ok) return <p>Error fetching user data.</p>;
   const user = await res.json();
 
   const res1 = await fetch(`${process.env.NEXT_PUBLIC_DOMAN}/postsid/${id}`, {
-    headers: {
-      Authorization: token, // لو محتاج تبعت التوكن
-    },
+    headers: { Authorization: token },
   });
-  if (!res1.ok) {
-    return (
-      <div>
-        <p>Error fetching user data. Please try again later.</p>
-      </div>
-    );
-  }
+  if (!res1.ok) return <p>Error fetching posts data.</p>;
   const posts = await res1.json();
-  console.log(posts);
+
+  const handleShare = (postId) => {
+    const postLink = `${window.location.origin}/profile/posts/${postId}`;
+    navigator.clipboard
+      .writeText(postLink)
+      .then(() => {
+        console.log("Link copied to clipboard");
+      })
+      .catch((err) => {
+        console.error("Failed to copy link: ", err);
+      });
+  };
 
   return (
-    <div>
+    <div className={style.container}>
       <div className={style.profile}>
         <div className={style.divImg}>
           <img src={user.userImage} alt="" />
         </div>
         <div className={style.info}>
-          <h2 className={style.name}>
-            {user.fullname}
-            {user.verified && (
-              <div className={style.verified}>
-                <img src={user.verificationBadge} />
-              </div>
-            )}
-          </h2>
+          <h2 className={style.name}>{user.fullname}</h2>
+          {user.verified && (
+            <img src={user.verificationBadge} className={style.verified} />
+          )}
           <h3 className={style.username}>@{user.username}</h3>
         </div>
       </div>
 
       <div>
-        <div>
-          <h1>Posts {user.fullname}</h1>
-          {posts.length > 0 ? (
-            <div className={style.posts}>
-              {posts.map((post) => (
+        <h1>Posts {user.fullname}</h1>
+        {posts.length > 0 ? (
+          <div className={style.posts}>
+            {posts.map((post) => (
+              <div className={style.postBody} key={post._id}>
                 <Link
                   href={`/profile/posts/${post._id}`}
                   className={style.post}
-                  key={post._id}
                 >
                   <div className={style.infoUser}>
                     <img className={style.userImg} src={post.userImage} />
@@ -89,12 +73,36 @@ const ProfilePage = async (props) => {
                     </div>
                   )}
                 </Link>
-              ))}
-            </div>
-          ) : (
-            <p>No posts found.</p>
-          )}
-        </div>
+                <div className={style.postFooter}>
+                  <div className={style.postLike}>
+                    <LikeButton
+                      postId={post._id}
+                      initialLikes={post.likes ? post.likes.length : 0}
+                    />
+                  </div>
+                  <div className={style.postComment}>
+                    <Link
+                      className={style.comment}
+                      href={`/profile/posts/${post._id}`}
+                    >
+                      {post.comments ? post.comments.length : 0} comments
+                    </Link>
+                  </div>
+                  <div className={style.postShare}>
+                    <button
+                      onClick={() => handleShare(post._id)}
+                      className={style.shareButton}
+                    >
+                      Share
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p>No posts found.</p>
+        )}
       </div>
     </div>
   );

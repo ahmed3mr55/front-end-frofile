@@ -10,7 +10,7 @@ export default function Login() {
   const [error, setError] = useState('');
   const router = useRouter(); // استخدام useRouter من 'next/navigation'
   if (Cookies.get('token')) {
-    router.push('/profile'); // التوجيه إلى صفحة البوستات بعد تسجيل الدخول
+    router.push('/profile');
   }
   const handleSubmit = async (e) => {
     e.preventDefault();

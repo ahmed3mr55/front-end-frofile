@@ -1,10 +1,15 @@
+.posts {
+    min-height: 60vh;
+}
 
 .profile {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 50px;
+    background: rgba(255, 255, 255, 0.1);
     padding: 10px;
+    width: 100%;
 }
 
 .info {
@@ -12,6 +17,7 @@
     align-items: self-start;
     flex-direction: column;
     gap: 20px;
+    text-wrap: wrap;
 }
 
 .divImg {
@@ -54,10 +60,12 @@
 
 .btnCreate {
     padding: 8px;
-    background: #000;
+    background: #121212;
     color: #fff;
     border: none;
     text-decoration: none;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
 .verified {
@@ -73,30 +81,81 @@
 
 
 
-.posts {
+@media (min-width: 381px) and (max-width: 649px) {
+    .profile {
+        flex-direction: column;
+        gap: 10px;
+        overflow: hidden;
+        max-width: 100%;
+        padding: 5px;
+    }
+    .divImg {
+        width: 150px;
+        height: 150px;
+    }
+    .info {
+        gap: 10px;
+    }
+    .btns {
+        width: 80%;
+        gap: 10px;
+        text-align: center;
+    }
+  }
+  
+  @media (max-width: 380px) {
+    .profile {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .divImg {
+        width: 150px;
+        height: 150px;
+    }
+  }
+
+  .posts {
     overflow: auto;
     display: flex;
-    width: 100%;
+    max-width: 100%;
     flex-direction: column;
     gap: 20px;
     padding: 20px;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 .post {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 100%;
+    width: 90%;
     max-width: 600px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    min-height: 110px;
+    border-radius: 10px;
     align-items: center;
     justify-content: center;
     text-decoration: none;
     color: inherit;
+}
+
+
+
+.postBody {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 90%;
+    max-width: 600px;
+    min-height: 110px;
+    padding: 20px;
+    border-radius: 10px;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: inherit;
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .postImg {
@@ -128,3 +187,65 @@
     font-size: 17px;
 }
 
+.postFooter {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.postFooter .postComment {
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+    color: #fff;
+    border: none;
+    outline: none;
+}
+
+.postFooter .postComment .comment {
+    color: #fff;
+    font-weight: 600;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+.postFooter .postShare {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #fff;
+    overflow: hidden;
+}
+
+.postFooter .postShare .shareButton {
+    color: #fff;
+    width: 100%;
+    padding: 10px;
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.postFooter .postShare .shareButton:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+
+@media (min-width: 381px) and (max-width: 649px) {
+
+  }
+  
+  @media (max-width: 380px) {
+
+  }

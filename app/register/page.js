@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import style from "./style.module.css";
+import Cookies from "js-cookie";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -36,7 +37,8 @@ export default function Register() {
       const data = await res.json();
 
       if (res.ok) {
-        router.push("/"); // إعادة توجيه بعد النجاح
+        Cookies.set('token', data.token, { expires: 7 });
+        router.push("/profile"); // إعادة توجيه بعد النجاح
       } else {
         setError(
           data.message || "Registration failed. Please check your inputs."

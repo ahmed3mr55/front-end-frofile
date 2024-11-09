@@ -1,0 +1,13 @@
+.btnLikes {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.1);
+    color: #fff;
+}
+
+.btnLikes:hover {
+    background: rgba(255, 255, 255, 0.2);
+}

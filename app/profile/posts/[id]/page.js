@@ -4,6 +4,7 @@ import style from "./style.module.css";
 import { formatDistanceToNow } from "date-fns";
 import Link from "next/link";
 import CommentForm from "./CommentForm"; // استيراد نموذج التعليق
+import LikeButton from "../../slices/Like/LikeButton";
 
 const PostPage = async (props) => {
   const cookieStore = cookies(); // الوصول إلى الكوكيز في بيئة السيرفر
@@ -37,11 +38,14 @@ const PostPage = async (props) => {
   const post = posts;
 
   // جلب التعليقات الخاصة بالبوست
-  const commentsRes = await fetch(`${process.env.NEXT_PUBLIC_DOMAN}/post/${id}/comments`, {
-    headers: {
-      Authorization: token, // إرسال التوكن في الـ headers
-    },
-  });
+  const commentsRes = await fetch(
+    `${process.env.NEXT_PUBLIC_DOMAN}/post/${id}/comments`,
+    {
+      headers: {
+        Authorization: token, // إرسال التوكن في الـ headers
+      },
+    }
+  );
 
   if (!commentsRes.ok) {
     return (
@@ -58,7 +62,7 @@ const PostPage = async (props) => {
     method: "GET",
     headers: {
       Authorization: token,
-    }
+    },
   });
 
   if (!resUser.ok) {
@@ -68,35 +72,53 @@ const PostPage = async (props) => {
 
   const userData = await resUser.json();
   const user = userData.user || {}; // تعيين user ككائن فارغ إذا لم توجد بيانات
-  console.log(user);
 
   return (
     <div className={style.body}>
       <div className={style.postTop}>
-      <div className={style.post} key={post._id}>
-        <div>
-          <div className={style.postHeader}>
-            <img className={style.userImg} src={post.userImage} alt={post.username} />{" "}
-            <Link href={`/profile/${post.userId}`} className={style.username}>
-              {post.username}
-            </Link>
-          </div>
-          <div className={style.postBody}>
-            <div className={style.postText}>
-              <p>{post.body}</p>
-              <p>{formatDistanceToNow(new Date(post.date), { addSuffix: true })}</p>
+        <div className={style.post} key={post._id}>
+          <div>
+            <div className={style.postHeader}>
+              <img
+                className={style.userImg}
+                src={post.userImage}
+                alt={post.username}
+              />{" "}
+              <Link href={`/profile/${post.userId}`} className={style.username}>
+                {post.username}
+              </Link>
             </div>
-            {post.postImg &&
-              <div className={style.Img}>
-                <img className={style.postImg} src={post.postImg}/>
+            <div className={style.postBody}>
+              <div className={style.postText}>
+                <p>{post.body}</p>
+                <p>
+                  {formatDistanceToNow(new Date(post.date), {
+                    addSuffix: true,
+                  })}
+                </p>
               </div>
-            }
+              {post.postImg && (
+                <div className={style.Img}>
+                  <img className={style.postImg} src={post.postImg} />
+                </div>
+              )}
+            </div>
+          </div>
+          <div className={style.postFooter}>
+            <LikeButton
+              postId={post._id}
+              initialLikes={post.likes ? post.likes.length : 0}
+            />
           </div>
         </div>
       </div>
-      </div>
-      {/*فورم كتابة الكومنت*/}
-      <CommentForm postId={post._id} userId={user._id} username={user.username} token={token} />
+
+      <CommentForm
+        postId={post._id}
+        userId={user._id}
+        username={user.username}
+        token={token}
+      />
 
       {/* عرض الكومنتات */}
       <div className={style.commentsSection}>
@@ -105,12 +127,20 @@ const PostPage = async (props) => {
           comments.map((comment) => (
             <div className={style.comment} key={comment._id}>
               <div className={style.commentHeader}>
-                <img className={style.userImg} src={comment.userImage} alt={comment.username} />
+                <img
+                  className={style.userImg}
+                  src={comment.userImage}
+                  alt={comment.username}
+                />
                 <p>{comment.username}</p>
               </div>
               <div className={style.commentBody}>
                 <p>{comment.body}</p>
-                <p>{formatDistanceToNow(new Date(comment.date), { addSuffix: true })}</p>
+                <p>
+                  {formatDistanceToNow(new Date(comment.date), {
+                    addSuffix: true,
+                  })}
+                </p>
               </div>
             </div>
           ))

@@ -15,10 +15,7 @@ export default function ProfilePosts() {
   useEffect(() => {
     const fetchUser = async () => {
       const token = Cookies.get("token");
-      const token1 = localStorage.setItem("token", token);
 
-      const x = localStorage.getItem("token");
-      console.log(x);
 
       if (!token) {
         router.push("/"); // إذا مفيش توكن، يتم التوجيه لصفحة تسجيل الدخول
@@ -34,6 +31,7 @@ export default function ProfilePosts() {
         });
 
         const data = await res.json();
+        console.log(data);
 
         if (res.ok) {
           setUser(data); // تخزين البوستات في state
@@ -70,6 +68,10 @@ export default function ProfilePosts() {
             </h2>
             <h3 className={style.username}>@{user.username}</h3>
             <p className={style.email}>{user.email}</p>
+            <div className={style.follow}>
+            <p className={style.followers}>Followers <span>{user.followers ? user.followers.length : 0}</span></p>
+            <p className={style.followers}>Following <span>{user.following ? user.following.length : 0}</span></p>
+            </div>
           </div>
         </div>
         <div className={style.btns}>

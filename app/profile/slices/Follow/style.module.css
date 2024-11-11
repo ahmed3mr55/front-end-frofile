@@ -1,0 +1,12 @@
+.btnFollow {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.btnFollow:hover {
+    background: rgba(255, 255, 255, 0.2);
+}

@@ -3,11 +3,12 @@ import { cookies } from "next/headers";
 import style from "./style.module.css";
 import Link from "next/link";
 import LikeButton from "../slices/Like/LikeButton";
+import FollowButton from "../slices/Follow/Follow";
 
 const ProfilePage = async (props) => {
   const cookieStore = cookies();
   const token = cookieStore.get("token")?.value;
-  const id = props.params.id;
+  const {id} = props.params;
 
   if (!token) {
     return <p>Unauthorized. Please login first.</p>;
@@ -49,6 +50,10 @@ const ProfilePage = async (props) => {
             <img src={user.verificationBadge} className={style.verified} />
           )}
           <h3 className={style.username}>@{user.username}</h3>
+          <div className={style.follow}>
+            <p className={style.followers}>Followers <span>{user.followers ? user.followers.length : 0}</span></p>
+            <FollowButton userId={user._id} />
+          </div>
         </div>
       </div>
 
@@ -89,10 +94,7 @@ const ProfilePage = async (props) => {
                     </Link>
                   </div>
                   <div className={style.postShare}>
-                    <button
-                      onClick={() => handleShare(post._id)}
-                      className={style.shareButton}
-                    >
+                    <button className={style.shareButton}>
                       Share
                     </button>
                   </div>

@@ -7,18 +7,15 @@ import Cookies from "js-cookie";
 export default function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [fullname, setFullname] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [username, setUsername] = useState("");
-  const [userImage, setUserImage] = useState("");
+  const [gender, setGender] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const imageToUse =
-      userImage || "https://cdn-icons-png.flaticon.com/256/149/149071.png";
-
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAN}/register`, {
         method: "POST",
@@ -29,8 +26,9 @@ export default function Register() {
           email,
           password,
           username,
-          fullname,
-          userImage: imageToUse, // استخدام الصورة الافتراضية عند الحاجة
+          firstName,
+          lastName,
+          gender,
         }),
       });
 
@@ -55,9 +53,16 @@ export default function Register() {
         <div className={style.inputs}>
           <input
             type="text"
-            placeholder="Full Name"
-            value={fullname}
-            onChange={(e) => setFullname(e.target.value)}
+            placeholder="First Name"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+            required
+          />
+          <input
+            type="text"
+            placeholder="Last Name"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
             required
           />
           <input
@@ -76,6 +81,7 @@ export default function Register() {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
+
           <input
             type="password"
             placeholder="Password"
@@ -84,14 +90,12 @@ export default function Register() {
             required
           />
         </div>
-        <div className={style.inputs}>
-          <input
-            type="text"
-            placeholder="URL UserImg"
-            value={userImage}
-            onChange={(e) => setUserImage(e.target.value)}
-          />
-        </div>
+
+        <select value={gender} onChange={(e) => setGender(e.target.value)}> 
+          <option disabled value=''>Select Gender</option>
+          <option value="Male">Male</option>
+          <option value="Female">Female</option>
+        </select>
 
         <button type="submit">Register</button>
       </form>

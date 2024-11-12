@@ -1,17 +1,23 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
-import { useRouter } from 'next/navigation'; // استبدال useRout
+import { useRouter } from 'next/navigation';
 import "./style.css";
 import Link from 'next/link';
+
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const router = useRouter(); // استخدام useRouter من 'next/navigation'
-  if (Cookies.get('token')) {
-    router.push('/profile');
-  }
+  const router = useRouter();
+
+  useEffect(() => {
+    // التوجيه بعد التحقق من التوكن في الكوكيز
+    if (Cookies.get('token')) {
+      router.push('/profile');
+    }
+  }, []); // يتم التحقق من التوكن مرة واحدة بعد التهيئة الأولية
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -29,8 +35,8 @@ export default function Login() {
       if (res.ok) {
         // تخزين التوكن في الكوكيز
         Cookies.set('token', data.token, { expires: 7 });
-        // التوجيه إلى صفحة البوستات بعد تسجيل الدخول
-        router.push('/profile'); // استخدام router.push للتوجيه
+        // التوجيه إلى صفحة البروفايل بعد تسجيل الدخول
+        router.push('/profile');
       } else {
         setError(data.message);
       }
@@ -57,7 +63,9 @@ export default function Login() {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <div className='createAccount'><Link className='link' href="/register">Create account</Link></div>
+        <div className='createAccount'>
+          <Link className='link' href="/register">Create account</Link>
+        </div>
         <button type="submit">Login</button>
       </form>
       {error && <p>{error}</p>}

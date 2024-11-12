@@ -1,3 +1,4 @@
+'use client';
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
@@ -9,18 +10,12 @@ export default function OtherPosts() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
+  const [skip, setSkip] = useState(0);
   const router = useRouter();
   const limit = 10;
-  const [skip, setSkip] = useState(0); // عدد البوستات اللي تم تحميلها
 
   const fetchPosts = async () => {
     if (loading || !hasMore) return;
-
-    const token = Cookies.get("token");
-    if (!token) {
-      router.push("/");
-      return;
-    }
 
     setLoading(true);
     try {
@@ -29,7 +24,7 @@ export default function OtherPosts() {
         {
           method: "GET",
           headers: {
-            Authorization: token,
+            Authorization: Cookies.get("token"),
           },
         }
       );
@@ -37,11 +32,11 @@ export default function OtherPosts() {
       const data = await res.json();
       if (res.ok) {
         if (data.posts.length === 0) {
-          setHasMore(false); // وقف التحميل إذا مفيش بوستات جديدة
+          setHasMore(false);
         } else {
-          setPosts((prevPosts) => [...prevPosts, ...data.posts]); // إضافة البوستات الجديدة
-          setSkip(skip + data.posts.length); // تحديث عدد البوستات اللي تم تحميلها
-          setHasMore(data.hasMore); // تحديث الحالة بناءً على القيمة من السيرفر
+          setPosts((prevPosts) => [...prevPosts, ...data.posts]);
+          setSkip((prevSkip) => prevSkip + data.posts.length);
+          setHasMore(data.hasMore);
         }
       }
     } catch (err) {
@@ -51,7 +46,12 @@ export default function OtherPosts() {
   };
 
   useEffect(() => {
-    fetchPosts(); // جلب أول دفعة من البوستات عند التحميل
+    // تحقق من التوكن ووجه المستخدم إذا لم يكن مسجلاً دخوله
+    if (!Cookies.get("token")) {
+      router.push("/");
+      return;
+    }
+    fetchPosts();
   }, []);
 
   useEffect(() => {
@@ -66,21 +66,20 @@ export default function OtherPosts() {
     };
 
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll); // تنظيف الحدث
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, [loading]);
 
-  // Function to copy post link to clipboard
   const handleShare = (postId) => {
     const postLink = `${window.location.origin}/profile/posts/${postId}`;
     navigator.clipboard
       .writeText(postLink)
-      .then(() => {
-        console.log("Link copied to clipboard");
-      })
-      .catch((err) => {
-        console.error("Failed to copy link: ", err);
-      });
+      .then(() => console.log("Link copied to clipboard"))
+      .catch((err) => console.error("Failed to copy link: ", err));
   };
+
   return (
     <>
       {posts.length > 0 ? (
@@ -89,13 +88,13 @@ export default function OtherPosts() {
             <div className={style.postBody} key={post._id}>
               <Link href={`/profile/posts/${post._id}`} className={style.post}>
                 <div className={style.infoUser}>
-                  <img className={style.userImg} src={post.userImage} />
+                  <img className={style.userImg} src={post.userImage} alt="User" />
                   <p className={style.username}>{post.username}</p>
                 </div>
                 <p>{post.body}</p>
                 {post.postImg && (
                   <div className={style.postImg}>
-                    <img className={style.img} src={post.postImg} />
+                    <img className={style.img} src={post.postImg} alt="Post" />
                   </div>
                 )}
               </Link>
@@ -114,15 +113,12 @@ export default function OtherPosts() {
                   />
                 </div>
                 <div className={style.postComment}>
-                  <Link
-                    className={style.comment}
-                    href={`/profile/posts/${post._id}`}
-                  >
+                  <Link className={style.comment} href={`/profile/posts/${post._id}`}>
                     {post.comments ? post.comments.length : 0} comments
                   </Link>
                 </div>
                 <div className={style.postShare}>
-                  <button 
+                  <button
                     onClick={() => handleShare(post._id)}
                     className={style.shareButton}
                   >

@@ -21,7 +21,7 @@ const Navbar = () => {
         Cookies.remove("token"); // حذف التوكن من الكوكيز
         router.push("/"); // توجيه المستخدم لصفحة الدخول
       } else {
-        console.error("Failed to log out");
+
       }
     } catch (error) {
       console.error("Error during logout:", error);
@@ -30,7 +30,7 @@ const Navbar = () => {
 
   return (
     <nav>
-      <Link className='logo' href="#">Cycle</Link>
+      <Link className='logo' href="/profile">-_-</Link>
       <ul>
         <li><Link className='itam' href="/profile">Profile</Link></li>
         <li><Link className='itam' href="/profile/posts/create">Create</Link></li>

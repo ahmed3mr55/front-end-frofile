@@ -8,7 +8,9 @@ import FollowButton from "../slices/Follow/Follow";
 const ProfilePage = async (props) => {
   const cookieStore = cookies();
   const token = cookieStore.get("token")?.value;
-  const {id} = props.params;
+
+  // استخدام await مع params للتأكد من جاهزيتها
+  const { id } = await props.params;
 
   if (!token) {
     return <p>Unauthorized. Please login first.</p>;
@@ -42,18 +44,31 @@ const ProfilePage = async (props) => {
     <div className={style.container}>
       <div className={style.profile}>
         <div className={style.divImg}>
-          <img src={user.userImage} alt="" />
+          <img
+            src={
+              user?.userImage?.url ||
+              "https://cdn-icons-png.flaticon.com/256/149/149071.png"
+            }
+          />
         </div>
         <div className={style.info}>
-          <h2 className={style.name}>{user.fullname}</h2>
-          {user.verified && (
-            <img src={user.verificationBadge} className={style.verified} />
-          )}
+          <h2 className={style.name}>
+            {user.firstName} {user.lastName}
+            {user.verified && (
+              <img src={user.verificationBadge} className={style.verified} />
+            )}
+          </h2>
           <h3 className={style.username}>@{user.username}</h3>
           <div className={style.follow}>
-            <p className={style.followers}>Followers <span>{user.followers ? user.followers.length : 0}</span></p>
+            <p className={style.followers}>
+              Followers{" "}
+              <span>{user.followers ? user.followers.length : 0}</span>
+            </p>
             <FollowButton userId={user._id} />
           </div>
+          <div className={style.bio}>
+              <p>{user.bio}</p>
+            </div>
         </div>
       </div>
 
@@ -94,9 +109,7 @@ const ProfilePage = async (props) => {
                     </Link>
                   </div>
                   <div className={style.postShare}>
-                    <button className={style.shareButton}>
-                      Share
-                    </button>
+                    <button className={style.shareButton}>Share</button>
                   </div>
                 </div>
               </div>

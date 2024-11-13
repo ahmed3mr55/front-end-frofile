@@ -28,18 +28,6 @@ const ProfilePage = async (props) => {
   if (!res1.ok) return <p>Error fetching posts data.</p>;
   const posts = await res1.json();
 
-  const handleShare = (postId) => {
-    const postLink = `${window.location.origin}/profile/posts/${postId}`;
-    navigator.clipboard
-      .writeText(postLink)
-      .then(() => {
-        console.log("Link copied to clipboard");
-      })
-      .catch((err) => {
-        console.error("Failed to copy link: ", err);
-      });
-  };
-
   return (
     <div className={style.container}>
       <div className={style.profile}>

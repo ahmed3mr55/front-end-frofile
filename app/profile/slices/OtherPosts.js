@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
@@ -79,7 +79,7 @@ export default function OtherPosts() {
       .then(() => console.log("Link copied to clipboard"))
       .catch((err) => console.error("Failed to copy link: ", err));
   };
-
+  console.log(posts);
   return (
     <>
       {posts.length > 0 ? (
@@ -88,8 +88,21 @@ export default function OtherPosts() {
             <div className={style.postBody} key={post._id}>
               <Link href={`/profile/posts/${post._id}`} className={style.post}>
                 <div className={style.infoUser}>
-                  <img className={style.userImg} src={post.userImage} alt="User" />
-                  <p className={style.username}>{post.username}</p>
+                  <img
+                    className={style.userImg}
+                    src={post.userImage}
+                    alt="User"
+                  />
+                  <p className={style.username}>
+                    {post.username}{" "}
+                    {post.verificationBadge && (
+                        <img
+                          src={post.verificationBadge}
+                          alt="Verified Badge"
+                          className={style.verifiedBadge}
+                        />
+                    )}
+                  </p>
                 </div>
                 <p>{post.body}</p>
                 {post.postImg && (
@@ -113,7 +126,10 @@ export default function OtherPosts() {
                   />
                 </div>
                 <div className={style.postComment}>
-                  <Link className={style.comment} href={`/profile/posts/${post._id}`}>
+                  <Link
+                    className={style.comment}
+                    href={`/profile/posts/${post._id}`}
+                  >
                     {post.comments ? post.comments.length : 0} comments
                   </Link>
                 </div>

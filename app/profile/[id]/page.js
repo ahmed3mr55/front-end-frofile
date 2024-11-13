@@ -84,7 +84,16 @@ const ProfilePage = async (props) => {
                 >
                   <div className={style.infoUser}>
                     <img className={style.userImg} src={post.userImage} />
-                    <p className={style.username}>{post.username}</p>
+                    <p className={style.username}>
+                    {post.username}{" "}
+                    {post.verificationBadge && (
+                        <img
+                          src={post.verificationBadge}
+                          alt="Verified Badge"
+                          className={style.verifiedBadge}
+                        />
+                    )}
+                    </p>
                   </div>
                   <p>{post.body}</p>
                   {post.postImg && (

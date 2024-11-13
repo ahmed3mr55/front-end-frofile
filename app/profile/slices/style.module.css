@@ -69,6 +69,10 @@
 .username {
     font-weight: 700;
     font-size: 17px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
 }
 
 .postFooter {
@@ -125,6 +129,11 @@
     background: rgba(255, 255, 255, 0.1);
 }
 
+
+.verifiedBadge {
+    width: 15px;
+    height: 15px;
+}
 
 @media (min-width: 381px) and (max-width: 649px) {
 

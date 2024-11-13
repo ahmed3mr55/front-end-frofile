@@ -115,7 +115,17 @@
 .inputFile {
     width: 80px;
 }
-
+.edit {
+    padding: 9px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    outline: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+}.edit:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
 
 
 @media (min-width: 381px) and (max-width: 649px) {

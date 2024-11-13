@@ -6,10 +6,10 @@ import Link from "next/link";
 import CommentForm from "./CommentForm"; // استيراد نموذج التعليق
 import LikeButton from "../../slices/Like/LikeButton";
 
-const PostPage = async (props) => {
-  const cookieStore = cookies(); // الوصول إلى الكوكيز في بيئة السيرفر
+const PostPage = async ({params}) => {
+  const cookieStore = await cookies(); // الوصول إلى الكوكيز في بيئة السيرفر
   const token = cookieStore.get("token")?.value; // استخراج التوكن من الكوكيز
-  const id = props.params.id;
+  const {id} = await params;
 
   if (!token) {
     return (
@@ -25,7 +25,7 @@ const PostPage = async (props) => {
       Authorization: token, // إرسال التوكن في الـ headers
     },
   });
-
+  
   if (!res.ok) {
     return (
       <div>
@@ -34,8 +34,10 @@ const PostPage = async (props) => {
     );
   }
 
+
   const { posts } = await res.json();
   const post = posts;
+
 
   // جلب التعليقات الخاصة بالبوست
   const commentsRes = await fetch(
@@ -72,6 +74,7 @@ const PostPage = async (props) => {
 
   const userData = await resUser.json();
   const user = userData.user || {}; // تعيين user ككائن فارغ إذا لم توجد بيانات
+  console.log(user);
 
   return (
     <div className={style.body}>

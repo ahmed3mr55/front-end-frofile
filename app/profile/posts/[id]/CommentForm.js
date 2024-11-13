@@ -4,12 +4,11 @@ import React from "react";
 import style from "./style.module.css";
 import Cookies from "js-cookie";
 
-const CommentForm = ({ postId }) => {
+const CommentForm = ({ postId, token }) => {
   const handleCommentSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     const body = formData.get("commentBody");
-    const token = Cookies.get("token");
 
     const commentRes = await fetch(`${process.env.NEXT_PUBLIC_DOMAN}/comment`, {
       method: "POST",
@@ -22,6 +21,9 @@ const CommentForm = ({ postId }) => {
         body
       }),
     });
+    console.log(body);
+    console.log(postId);
+    console.log(token);
 
     if (commentRes.ok) {
       // يمكنك إعادة تحميل البيانات أو تحديث الواجهة كما تراه مناسبًا

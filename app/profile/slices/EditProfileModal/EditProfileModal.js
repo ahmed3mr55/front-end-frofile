@@ -69,13 +69,14 @@ export default function EditProfileModal({ user, onClose, onUpdate }) {
             value={formData.email}
             onChange={handleChange}
           />
-          <label>Full Name</label>
+          <label>First Name</label>
           <input
             type="text"
             name="firstName"
             value={formData.firstName}
             onChange={handleChange}
           />
+          <label>Last Name</label>
           <input
             type="text"
             name="lastName"

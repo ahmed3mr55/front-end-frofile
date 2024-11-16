@@ -39,7 +39,6 @@ const Navbar = () => {
           <button  className='itam logout' onClick={handleLogout}>Logout</button>
         </li>
         }
-        
       </ul>
     </nav>
   );

@@ -3,9 +3,7 @@ nav {
   justify-content: space-around;
   align-items: center;
   position: fixed;
-  max-width: 100%;
-  min-width: 100%;
-  margin: auto;
+  width: 100vw;
   padding: 20px 0;
   backdrop-filter: blur(5px);
   background: rgba(255, 255, 255, 0.3);

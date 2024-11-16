@@ -7,7 +7,7 @@ import FollowButton from "../slices/Follow/Follow";
 
 const ProfilePage = async (props) => {
   const cookieStore = cookies();
-  const token = cookieStore.get("token")?.value;
+  const token = cookieStore.get("token").value;
 
   // استخدام await مع params للتأكد من جاهزيتها
   const { id } = await props.params;

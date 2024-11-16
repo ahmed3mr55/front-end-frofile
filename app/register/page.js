@@ -65,7 +65,9 @@ export default function Register() {
             onChange={(e) => setLastName(e.target.value)}
             required
           />
-          <input
+        </div>
+        <div className={style.inputs}>
+        <input
             type="text"
             placeholder="Username"
             value={username}

@@ -11,6 +11,7 @@
     justify-content: center;
     height: 100vh;
     padding: 10px;
+    flex-wrap: wrap;
 }
 
 .container input {
@@ -19,6 +20,15 @@
     border-radius: 8px;
     outline: none;
     margin: 10px;
+}
+
+.inputs {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .container button {
@@ -31,5 +41,9 @@
 }
 
 .container button:hover {
+    background: #ccc;
+}
+
+.container button:active {
     background: #ccc;
 }

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import style from "./style.module.css";
 import Cookies from "js-cookie";
+import Link from "next/link";
 
 export default function Register() {
   const [email, setEmail] = useState("");
@@ -48,8 +49,8 @@ export default function Register() {
 
   return (
     <div>
-      <h1 className={style.title}>Register</h1>
       <form className={style.container} onSubmit={handleSubmit}>
+      <h1 className={style.title}>Register Page</h1>
         <div className={style.inputs}>
           <input
             type="text"
@@ -98,6 +99,7 @@ export default function Register() {
           <option value="Male">Male</option>
           <option value="Female">Female</option>
         </select>
+        <Link className={style.link} href="/">Login here</Link>
 
         <button type="submit">Register</button>
       </form>

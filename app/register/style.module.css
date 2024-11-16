@@ -47,3 +47,9 @@
 .container button:active {
     background: #ccc;
 }
+
+.link {
+    text-align: center;
+    color: inherit;
+    font-size: 15px;
+}

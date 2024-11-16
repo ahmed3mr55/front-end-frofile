@@ -11,7 +11,7 @@ nav {
   background: rgba(255, 255, 255, 0.3);
   z-index: 1000;
   position: fixed;
-  top: 2%;
+  top: 1%;
   left: 50%;
   overflow: hidden;
   transform: translateX(-50%);

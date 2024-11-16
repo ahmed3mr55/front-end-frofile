@@ -7,6 +7,8 @@ import style from './style.module.css';
 import Link from 'next/link';
 
 export default function ProfilePosts() {
+  screenTop = () => window.scrollTo(0, 0);
+  window.scrollTo(0, 0);
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState('');
   const router = useRouter();

@@ -1,4 +1,3 @@
-"use client";
 import React from 'react'
 import OtherPosts from '../slices/OtherPosts';
 

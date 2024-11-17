@@ -10,10 +10,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-      <Analytics/>
         <Navbar />
         <div className="app"></div>
         {children}
+      <Analytics/>
       </body>
     </html>
   );

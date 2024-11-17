@@ -1,5 +1,6 @@
 import "./globals.css";
 import Navbar from "./profile/slices/navBar/NavBar";
+import { Analytics } from "@vercel/analytics/react";
 
 export const metadata = {
   title: "Create Next App",
@@ -9,6 +10,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
+      <Analytics/>
         <Navbar />
         <div className="app"></div>
         {children}

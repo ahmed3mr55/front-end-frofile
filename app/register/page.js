@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import style from "./style.module.css";
 import Cookies from "js-cookie";
@@ -14,6 +14,14 @@ export default function Register() {
   const [gender, setGender] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
+
+  useEffect(() => {
+    // التوجيه بعد التحقق من التوكن في الكوكيز
+    if (Cookies.get('token')) {
+      router.push('/profile');
+    }
+  }, []); // يتم التحقق من التوكن مرة واحدة بعد التهيئة الأولية
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -36,11 +44,12 @@ export default function Register() {
       const data = await res.json();
 
       if (res.ok) {
-        router.push("/"); // إعادة توجيه بعد النجاح
+        // تخزين التوكن في الكوكيز
+        Cookies.set('token', data.token, { expires: 7 });
+        // التوجيه إلى صفحة البروفايل بعد تسجيل الدخول
+        router.push('/profile');
       } else {
-        setError(
-          data.message || "Registration failed. Please check your inputs."
-        );
+        setError(data.message);
       }
     } catch (err) {
       setError(err.message || "An error occurred. Please try again.");

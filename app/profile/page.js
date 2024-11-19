@@ -11,8 +11,9 @@ export default function ProfilePosts() {
   const [user, setUser] = useState([]);
   const [error, setError] = useState("");
   const [file, setFile] = useState(null);
-  const [preview, setPreview] = useState(null); // لحفظ رابط معاينة الصورة
-  const [successMessage, setSuccessMessage] = useState(""); // لرسالة النجاح
+  const [preview, setPreview] = useState(null);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const [showEditModal, setShowEditModal] = useState(false);
 
@@ -20,9 +21,17 @@ export default function ProfilePosts() {
     const selectedFile = e.target.files[0];
     setFile(selectedFile);
     if (selectedFile) {
-      setPreview(URL.createObjectURL(selectedFile)); // إنشاء رابط معاينة
+      setPreview(URL.createObjectURL(selectedFile));
     }
   };
+
+  useEffect(() => {
+    return () => {
+      if (preview) {
+        URL.revokeObjectURL(preview);
+      }
+    };
+  }, [preview]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,39 +41,37 @@ export default function ProfilePosts() {
       return;
     }
 
+    setIsLoading(true);
+
     const token = Cookies.get("token");
     const formData = new FormData();
-    formData.append("image", file); // إضافة الصورة باسم "image" كما هو في الباك إند
+    formData.append("image", file);
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAN}/Porfile-photo-upload`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAN}/profile-photo-upload`, {
         method: "POST",
         headers: {
-          Authorization: `${token}`, // إرسال التوكن في الهيدر
+          Authorization: token,
         },
         body: formData,
       });
 
       const data = await res.json();
-
       if (res.ok) {
-        // تحديث صورة المستخدم في الواجهة
         setUser((prevUser) => ({
           ...prevUser,
           userImage: data.userImage,
         }));
-        setSuccessMessage("The photo was uploaded successfully!"); // رسالة نجاح
-        setTimeout(() => setSuccessMessage(""), 3000); // إخفاء الرسالة بعد 3 ثوانٍ
+        setSuccessMessage("The photo was uploaded successfully!");
+        setTimeout(() => setSuccessMessage(""), 3000);
       } else {
         setError(data.message);
       }
     } catch (err) {
       setError("An error occurred while uploading the photo.");
+    } finally {
+      setIsLoading(false);
     }
-  };
-
-  const handleUpdateUser = (updatedUser) => {
-    setUser(updatedUser);
   };
 
   useEffect(() => {
@@ -72,7 +79,7 @@ export default function ProfilePosts() {
       const token = Cookies.get("token");
 
       if (!token) {
-        router.push("/"); // إعادة التوجيه لصفحة تسجيل الدخول لو مفيش توكن
+        router.push("/");
         return;
       }
 
@@ -80,7 +87,7 @@ export default function ProfilePosts() {
         const res = await fetch(`${process.env.NEXT_PUBLIC_DOMAN}/profile`, {
           method: "GET",
           headers: {
-            Authorization: `${token}`,
+            Authorization: token,
           },
         });
 
@@ -115,36 +122,34 @@ export default function ProfilePosts() {
               id="file"
               className={style.inputFile}
               onChange={handleFileChange}
-              placeholder="Upload Image"
               accept="image/*"
             />
-            <button className={style.btnUpload} type="submit">
-              Upload
+            <button className={style.btnUpload} type="submit" disabled={!file || isLoading}>
+              {isLoading ? "Uploading..." : "Upload"}
             </button>
           </form>
-          {successMessage && <p className={style.success}>{successMessage}</p>} {/* عرض رسالة النجاح */}
+          {successMessage && <p className={style.success}>{successMessage}</p>}
+          {error && <p className={style.error}>{error}</p>}
         </div>
         <div className={style.info}>
           <h2 className={style.name}>
-            {user.firstName} {user.lastName}
+            {user?.firstName || "First Name"} {user?.lastName || "Last Name"}
             {user.verified && (
-              <div className={style.verified}>
-                <img src={user.verificationBadge} alt="Verified Badge" />
-              </div>
+              <img src={user.verificationBadge} className={style.verified} />
             )}
           </h2>
-          <h3 className={style.username}>@{user.username}</h3>
-          <p className={style.email}>{user.email}</p>
+          <h3 className={style.username}>@{user?.username || "Username"}</h3>
+          <p className={style.email}>{user?.email || "Email not provided"}</p>
           <div className={style.follow}>
             <p className={style.followers}>
-              Followers <span>{user.followers ? user.followers.length : 0}</span>
+              Followers <span>{user?.followers?.length || 0}</span>
             </p>
             <p className={style.followers}>
-              Following <span>{user.following ? user.following.length : 0}</span>
+              Following <span>{user?.following?.length || 0}</span>
             </p>
           </div>
           <div className={style.bio}>
-            <p>{user.bio}</p>
+            <p>{user?.bio || "No bio available"}</p>
           </div>
         </div>
         <div>
@@ -166,7 +171,7 @@ export default function ProfilePosts() {
         <EditProfileModal
           user={user}
           onClose={() => setShowEditModal(false)}
-          onUpdate={handleUpdateUser}
+          onUpdate={(updatedUser) => setUser(updatedUser)}
           className={style.editModal}
         />
       )}

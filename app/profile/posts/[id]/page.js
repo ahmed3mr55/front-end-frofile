@@ -94,7 +94,7 @@ const PostPage = async ({params}) => {
             <div className={style.postBody}>
               <div className={style.postText}>
                 <p>{post.body}</p>
-                <p>
+                <p className={style.postDate}>
                   {formatDistanceToNow(new Date(post.date), {
                     addSuffix: true,
                   })}

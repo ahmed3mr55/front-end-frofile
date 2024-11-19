@@ -177,6 +177,7 @@
       margin-top: 50px;
       padding: 10px;
       flex-direction: column;
+      width: 100vw;
     }
   
     .post {
@@ -210,6 +211,7 @@
       padding: 5px;
       margin-top: 20px;
       flex-direction: column;
+      width: 100vw;
     }
   
     .post {

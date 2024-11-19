@@ -1,3 +1,18 @@
+.back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.link {
+    text-decoration: none;
+    color: inherit;
+}
+
+
 .posts {
     overflow: auto;
     display: flex;
@@ -13,10 +28,10 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 100%;
+    width: 70%;
+    background: rgba(255, 255, 255, 0.1);
     max-width: 600px;
     padding: 20px;
-    border: 1px solid #ccc;
     border-radius: 8px;
     align-items: center;
     justify-content: center;
@@ -52,6 +67,8 @@
     font-weight: 700;
     font-size: 17px;
 }
+
+
 
 .deleteButton {
     background-color: red; /* لون خلفية الزر */

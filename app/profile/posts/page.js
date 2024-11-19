@@ -84,7 +84,7 @@ export default function ProfilePosts() {
         <div className={style.posts}>
           {posts.map((post) => (
             <div className={style.post} key={post._id}>
-              <Link href={`/profile/posts/${post._id}`}>
+              <Link className={style.link} href={`/profile/posts/${post._id}`}>
                 <div className={style.infoUser}>
                   <img className={style.userImg} src={post.userImage} />
                   <p className={style.username}>{post.username}</p>

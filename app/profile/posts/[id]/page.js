@@ -6,10 +6,12 @@ import Link from "next/link";
 import CommentForm from "./CommentForm"; // استيراد نموذج التعليق
 import LikeButton from "../../slices/Like/LikeButton";
 
-const PostPage = async ({params}) => {
+
+
+const PostPage = async ({ params }) => {
   const cookieStore = await cookies(); // الوصول إلى الكوكيز في بيئة السيرفر
   const token = cookieStore.get("token")?.value; // استخراج التوكن من الكوكيز
-  const {id} = await params;
+  const { id } = await params;
 
   if (!token) {
     return (
@@ -25,7 +27,7 @@ const PostPage = async ({params}) => {
       Authorization: token, // إرسال التوكن في الـ headers
     },
   });
-  
+
   if (!res.ok) {
     return (
       <div>
@@ -34,10 +36,8 @@ const PostPage = async ({params}) => {
     );
   }
 
-
   const { posts } = await res.json();
   const post = posts;
-
 
   // جلب التعليقات الخاصة بالبوست
   const commentsRes = await fetch(
@@ -74,7 +74,6 @@ const PostPage = async ({params}) => {
 
   const userData = await resUser.json();
   const user = userData.user || {}; // تعيين user ككائن فارغ إذا لم توجد بيانات
-  console.log(user);
 
   return (
     <div className={style.body}>
@@ -144,6 +143,8 @@ const PostPage = async ({params}) => {
                     addSuffix: true,
                   })}
                 </p>
+              </div>
+              <div className={style.commentDelete}>
               </div>
             </div>
           ))

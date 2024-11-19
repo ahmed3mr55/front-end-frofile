@@ -6,6 +6,9 @@ import style from "./style.module.css";
 import Link from "next/link";
 import OtherPosts from "./slices/OtherPosts";
 import EditProfileModal from "./slices/EditProfileModal/EditProfileModal";
+import DeleteProfileButton from "./slices/DeleteProfileButton/DeleteProfileButton";
+
+
 
 export default function ProfilePosts() {
   const [user, setUser] = useState([]);
@@ -131,6 +134,7 @@ export default function ProfilePosts() {
           {successMessage && <p className={style.success}>{successMessage}</p>}
           {error && <p className={style.error}>{error}</p>}
         </div>
+        
         <div className={style.info}>
           <h2 className={style.name}>
             {user?.firstName || "First Name"} {user?.lastName || "Last Name"}
@@ -176,6 +180,7 @@ export default function ProfilePosts() {
         />
       )}
       <OtherPosts />
+      <DeleteProfileButton token={Cookies.get("token")} />
     </div>
   );
 }

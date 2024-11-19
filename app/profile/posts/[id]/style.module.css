@@ -169,3 +169,98 @@
     color: inherit;
     background: #121212;
 }
+
+
+/* شاشات متوسطة الحجم (بين 381px و 649px) */
+@media (min-width: 381px) and (max-width: 649px) {
+    .body {
+      margin-top: 50px;
+      padding: 10px;
+      flex-direction: column;
+    }
+  
+    .post {
+      width: 90%;
+      padding: 15px;
+      margin-bottom: 30px;
+    }
+  
+    .Img {
+      width: 300px;
+      height: 300px;
+    }
+  
+    .inputComment {
+      max-width: 100%;
+      min-width: 100%;
+      max-height: 40px;
+      min-height: 40px;
+      font-size: 14px;
+    }
+  
+    .buttonComment {
+      padding: 8px;
+      font-size: 14px;
+    }
+  }
+  
+  /* شاشات صغيرة جدًا (أقل من 380px) */
+  @media (max-width: 380px) {
+    .body {
+      padding: 5px;
+      margin-top: 20px;
+      flex-direction: column;
+    }
+  
+    .post {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+  
+    .postHeader {
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+    }
+  
+    .userImg {
+      width: 40px;
+      height: 40px;
+    }
+  
+    .Img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+  
+    .postText {
+      padding: 10px;
+      flex-direction: column;
+    }
+  
+    .inputComment {
+      max-width: 100%;
+      min-width: 100%;
+      max-height: 35px;
+      min-height: 35px;
+      font-size: 12px;
+    }
+  
+    .buttonComment {
+      padding: 6px;
+      font-size: 12px;
+    }
+  
+    .comment {
+      width: 100%;
+      flex-direction: column;
+      padding: 10px;
+    }
+  
+    .commentsSection {
+      padding: 5px;
+    }
+  }
+  

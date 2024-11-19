@@ -178,6 +178,7 @@
       padding: 10px;
       flex-direction: column;
       width: 100vw;
+      overflow: hidden;
     }
   
     .post {
@@ -212,6 +213,7 @@
       margin-top: 20px;
       flex-direction: column;
       width: 100vw;
+      overflow: hidden;
     }
   
     .post {

@@ -77,7 +77,7 @@ export default function ProfilePosts() {
   }
 
   return (
-    <>
+    <div className={style.container}>
       <h1>Your Posts</h1>
       <Link className={style.back} back href={"/profile"}>Go to Profile</Link>
       {posts.length > 0 ? (
@@ -106,6 +106,6 @@ export default function ProfilePosts() {
       ) : (
         <p>No posts found.</p>
       )}
-    </>
+    </div>
   );
 }

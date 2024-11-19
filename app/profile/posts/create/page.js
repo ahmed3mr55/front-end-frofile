@@ -55,7 +55,7 @@ export default function Createpost() {
           <label>URL Of Image</label>
           <input
             type="text"
-            placeholder="Enter URL of image"
+            placeholder="Enter image URL"
             value={form.postImg}
             onChange={(e) => {
               setForm({ ...form, postImg: e.target.value });

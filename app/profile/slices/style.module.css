@@ -43,8 +43,8 @@
 }
 
 .postImg {
-    width: 70%;
-    height: 300px;
+    width: 60%;
+    height: 60%;
     object-fit: cover;
 }
 

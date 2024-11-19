@@ -191,8 +191,8 @@
     }
   
     .inputComment {
-      max-width: 100%;
-      min-width: 100%;
+      max-width: 60%;
+      min-width: 60%;
       max-height: 40px;
       min-height: 40px;
       font-size: 14px;
@@ -213,7 +213,7 @@
     }
   
     .post {
-      width: 100%;
+      width: 70%;
       padding: 10px;
       margin-bottom: 20px;
     }
@@ -225,12 +225,12 @@
     }
   
     .userImg {
-      width: 40px;
-      height: 40px;
+      width: 35px;
+      height: 35px;
     }
   
     .Img {
-      width: 100%;
+      width: 80%;
       height: auto;
       border-radius: 8px;
     }
@@ -241,8 +241,8 @@
     }
   
     .inputComment {
-      max-width: 100%;
-      min-width: 100%;
+      max-width: 50%;
+      min-width: 50%;
       max-height: 35px;
       min-height: 35px;
       font-size: 12px;
